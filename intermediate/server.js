@@ -32,6 +32,13 @@ const server = http.createServer((req, res) => {
             // if everything is ok
             res.statusCode = 200;
             break;
+        case '/about-me':
+            // redirection code
+            res.statusCode = 301;
+            // redirect
+            res.setHeader('Location', '/about');
+            res.end();
+            break;
         default:
             path += '404.html';
             // if it is not ok
