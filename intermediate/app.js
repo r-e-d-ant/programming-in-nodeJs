@@ -13,16 +13,22 @@ app.listen(3000);
 app.get('/', (req, res) => {
     // res.send('<p>home page</p>');
     // res.render('./views/index.html', { root: __dirname }); // old before we add ejs view engine
-    res.render('index');
+
+    const blogs = [
+        {title: 'Yoshi finds eggs', snippet: 'lorem ipsum dolor sit amet consectetur'},
+        {title: 'Mario finds stars', snippet: 'lorem ipsum dolor sit amet consectetur'},
+        {title: 'How to defeat bowser', snippet: 'lorem ipsum dolor sit amet consectetur'},
+    ];
+    res.render('index', { title: 'Home', blogs });
 })
 app.get('/about', (req, res) => {
     // res.send('<p>about page</p>');
     // res.sendFile('./views/about.html', { root: __dirname }); // old before we add ejs view engine
-    res.render('about')
+    res.render('about', { title: 'About' })
 })
 
 app.get('/blogs/create', (req, res) => {
-    res.render('create');
+    res.render('create', { title: 'Create' });
 })
 
 // redirects
@@ -33,5 +39,5 @@ app.get('/blogs/create', (req, res) => {
 // 404 page
 app.use((req, res) => {
     // res.status(404).sendFile('./views/404.html', { root: __dirname });
-    res.status(404).render('404');
+    res.status(404).render('404', { title: '404' });
 })
