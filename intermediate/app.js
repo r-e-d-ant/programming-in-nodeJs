@@ -5,6 +5,11 @@ const morgan = require('morgan');
 // express app
 const app = express();
 
+const pass = 'password';
+// connect to mongodb
+const dbURI = 'mongodb+srv://username:<password>@nodetuts.2xk5a7d.mongodb.net/?retryWrites=true&w=majority';
+
+
 // register view engine
 app.set('view engine', 'ejs');
 
