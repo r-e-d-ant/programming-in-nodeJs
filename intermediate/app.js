@@ -20,6 +20,9 @@ app.listen(3000);
 //     next(); // continue to next middleware don't hang here!
 // });
 
+// middleware & static files
+app.use(express.static('public'));
+
 app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
