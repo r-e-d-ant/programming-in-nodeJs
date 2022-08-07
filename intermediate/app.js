@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const Blog = require('./models/blog');
 
 // express app
 const app = express();
@@ -32,8 +33,44 @@ app.set('view engine', 'ejs');
 
 // middleware & static files
 app.use(express.static('public'));
-
 app.use(morgan('dev'));
+
+// mongoose and mongo sandbox routes
+app.get('/add-blog', (req, res) => {
+    const blog = new Blog({
+        title: 'new blog 2',
+        snippet: 'about my new blog',
+        body: 'more about my new blog'
+    });
+
+    blog.save()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+app.get('/all-blogs', (req, res) => {
+    Blog.find()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+});
+
+app.get('/single-blog', (req, res) => {
+    Blog.findById('62f01a96dcbd0201d2803e68')
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+})
 
 app.get('/', (req, res) => {
     // res.send('<p>home page</p>');
